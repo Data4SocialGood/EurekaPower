@@ -1,0 +1,39 @@
+{
+    "version": 3,
+    "port":8081,
+    "timeout": "5s",
+    "endpoints":[
+    {
+      "endpoint": "/keycloak-protected",
+      "output_encoding": "no-op",
+      "extra_config": {
+        "auth/validator": {
+            "alg": "RS256",
+            "jwk_url": "http://127.0.0.1:8080/realms/ppc/protocol/openid-connect/certs",
+            "disable_jwk_security": true
+        },
+        "backend/http": {
+          "return_error_details": "backend_alias"
+
+        }
+    },
+      "backend": [
+          {
+            "encoding": "no-op",
+            "host":["http://127.0.0.1:5001"],
+            "url_pattern": "/home"
+          }
+      ]
+    },
+    {
+      "endpoint": "/test",
+      "output_encoding": "no-op",
+      "backend": [
+          {
+            "encoding": "no-op",
+            "host":["http://127.0.0.1:8081"],
+            "url_pattern": "/__health"
+          }
+      ]
+    }]
+  }

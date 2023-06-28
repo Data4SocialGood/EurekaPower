@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+  # keycloak:
+  #   image: quay.io/keycloak/keycloak:21.1.1
+  #   command: start-dev
+  #   ports:
+  #     - 8080:8080
+  #   environment:
+  #     - KEYCLOAK_ADMIN=admin
+  #     - KEYCLOAK_ADMIN_PASSWORD=admin
+  #   volumes:
+  #     - keycloak:/opt/keycloak:rw
+  #   networks:
+  #     frontend_network:
+  #       ipv4_address: 192.168.128.5
+
+  # kraken:
+  #   build: ./kraken/
+  #   command: run -c krakend.json
+  #   ports:
+  #     - 8081:8081
+  #   volumes:
+  #     - kraken:/etc/krakend/:rw
+  #   networks:
+  #     frontend_network:
+  #       ipv4_address: 192.168.128.3
+
+  backend:
+    build: ./backend/
+    command: run --host=192.168.128.2
+    # ports:
+    #   - 5000:5000
+    networks:  
+      frontend_network:
+        ipv4_address: 192.168.128.2
+  
+  # frontend:
+  #   build: ./frontend/
+  #   command: run --host=192.168.128.4
+  #   # ports:
+  #   #   - 5000:5000
+  #   networks:  
+  #     frontend_network:
+  #       ipv4_address: 192.168.128.4
+
+    
+        
+volumes:
+  keycloak:
+    external: True
+  kraken:
+
+networks:
+  frontend_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.128.0/24"

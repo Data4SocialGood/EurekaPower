@@ -1,0 +1,14 @@
+{
+  "realm": "ppc",
+  "auth-server-url": "http://localhost:8080/",
+  "ssl-required": "external",
+  "resource": "frontend",
+  "verify-token-audience": true,
+  "credentials": {
+    "secret": "Z5sJpXp6d7bB1LFHws0FDcQyxTyG0vnF"
+  },
+  "confidential-port": 0,
+  "policy-enforcer": {
+    "credentials": {}
+  }
+}

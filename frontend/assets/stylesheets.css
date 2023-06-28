@@ -1,0 +1,32 @@
+.banner{
+    height: 75px;
+    margin: 0px -10px 10px;
+    background-color: rgb(241, 118, 69);
+    border-radius: 2px;
+    
+}
+
+.banner h2{
+    color: rgb(31, 72, 197);
+    padding-top: 10px;
+    margin-left: 2%;
+    display: inline-block;
+}
+
+.banner Img{
+    position: relative;
+    float: right;
+    right: 10px;
+    height: 75px;
+}
+
+.app-header {
+    height: 60px;
+    line-height: 60px;
+    border-bottom: thin lightgrey solid;
+}
+
+.app-header .app-header--title {
+    font-size: 22px;
+    padding-left: 5px;
+}
