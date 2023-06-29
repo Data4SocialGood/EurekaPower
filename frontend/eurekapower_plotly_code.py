@@ -18,7 +18,6 @@ import json
 from datetime import datetime
 from flask import session
 from keycloak.extensions.flask import AuthenticationMiddleware
-
 # user = json.loads(session["user"])
 # user["sub"]
 
@@ -72,7 +71,7 @@ def api_prediction(_contract_account_id):
     df_future = pd.DataFrame(dict_prediction)
 
     # Create a line chart for monthly energy consumption prediction
-    fig1 = px.line(df_future, x="Month", y="consumption", title="Monthly Energy Consumption prediction")
+    fig1 = px.line(df_future, x="Month", y="consumption", markers=True,title="Monthly Energy Consumption prediction",labels={'Month':'Month/Year','consumption':'Energy Consumption (kWh)'})
 
     return fig1
     
@@ -199,8 +198,9 @@ app.layout = html.Div(
         dcc.Tab(label='Prediction for energy consumption', value='Prediction for energy consumption', style={'font-family': 'Georgia', 'font-size': '20px'}),
         dcc.Tab(label='Gamification', value='Gamification', style={'font-family': 'Georgia', 'font-size': '20px'})
     ]),
-    html.Button(id="logout-button", children="Logout", style={'position': 'absolute', 'top': '10px', 'right': '10px'}),
-        html.Div(id="logout-message"),
+    html.A(href='/logout',children=[html.Img(alt='Logout',
+    src='assets/logout.png',width=50,height=50,
+    style={'position': 'absolute', 'top': '10px', 'right': '10px'})]),
     html.Div(id='content')
 ])
 
@@ -268,7 +268,7 @@ def render_content(tab):
             dcc.Input(id="postal-code-input", type="number", value=postal_code_input, disabled=False),
             dcc.Graph(id="energy-consumption", 
                     figure={'layout':{
-                        'xaxis': {'showgrid': False, 'tickfont': {'size': 14}},
+                        'xaxis': {'showgrid': False, 'tickfont': {'size': 18}},
                         'yaxis': {'showgrid': False}
                          }          
                     }),
@@ -314,14 +314,27 @@ def render_content(tab):
         children=[
         html.H1("Let's play a game! Tell us the percentage of energy savings and find out your discount! ",
                 style={'backgroundColor': '#FF5733', 'padding': '10px', 'textAlign': 'center', 'margin-bottom': '50px', }),
+        html.Div([
         dcc.Slider(
             id="energy-savings-slider",
             min=0,
             max=100,
             step=5,
             value=10,
-            marks={10: "10%", 20: "20%", 30: "30%", 40: "40%", 50: "50%", 60: "60%", 70: "70%", 80: "80%", 90: "90%", 100: "100%"},
+            marks={
+                10: {'label':'10%','style':{'color':'#000000'}}, 
+            20: {'label':'20%','style':{'color':'#000000'}}, 
+            30: {'label':'30%','style':{'color':'#000000'}}, 
+            40: {'label':'40%','style':{'color':'#000000'}}, 
+            50: {'label':'50%','style':{'color':'#000000'}}, 
+            60: {'label':'60%','style':{'color':'#000000'}}, 
+            70: {'label':'70%','style':{'color':'#FF0000'}}, 
+            80: {'label':'80%','style':{'color':'#FF0000'}}, 
+            90: {'label':'90%','style':{'color':'#FF0000'}}, 
+            100: {'label':'100%','style':{'color':'#FF0000'}}
+            },
 
+         ),],style={'transform':'scale(1.3,2.8)'}
         ),
         html.Div(id="energy-savings-message", style={'margin-bottom': '100px', 'margin-top': '50px', 'font-size': '50px'}),
         html.Div(
@@ -348,7 +361,7 @@ def update_figure(postal_code):
     filtered_df = df_PPC_SOPPCO[df_PPC_SOPPCO["PoD_Postal_Code"] == postal_code]
     #peak_value=np.max(df_PPC_SOPPCO[df_PPC_SOPPCO["Total_Consumption"]])
     #min_value= np.min(df_PPC_SOPPCO[df_PPC_SOPPCO["Total_Consumption"]])
-    fig = px.line(filtered_df, x="Month", y="Total_Consumption",color="Year", title="Monthly Energy Consumption")
+    fig = px.line(filtered_df, x="Month", y="Total_Consumption",color="Year",markers=True, title="Monthly Energy Consumption",labels={'Month':'Month','Total_Consumption':'Energy Consumption (kWh)'})
     return fig
 ##############################################################################################################################################################
 
@@ -360,11 +373,11 @@ def update_figure(postal_code):
 def update_energy_savings_message(value):
     if  value < 20:
         message = "You should have a bigger reduction in your energy consumption to get a discount"
-    elif value == 20:
+    elif value in range(20,29):
         message = "You have an additional 20% discount"
-    elif value == 30:
+    elif value in range(30,49):
         message = "Good work! You have an additional 30% discount"
-    elif value == 50:
+    elif value in range(50,59):
         message = "Well done! You have an additional 50% discount"
     elif value >60:
         message = "Wow! You succeeded a significant reduction in energy consumption. Contact your energy provider directly to get you reward!"
