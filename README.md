@@ -34,7 +34,7 @@ a commercial toolchain, to solidify privacy and security for sensitive user data
 Before we start please install [Docker](https://docs.docker.com/engine/install/) and [Python](https://www.python.org/) (Recommended version 3.9.17)
 
 Clone the project and unzip it: \
-``` git clone https://github.com/Data4SocialGood/EurekaPower.git ```
+``` git clone https://github.com/Data4SocialGood/EurekaPower.git ``` \
 ``` unzip EurekaPower-main.zip ``` \
 We have to deploy the backend, frontend and the Authorization server (Keycloak) 
 
