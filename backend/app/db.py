@@ -54,7 +54,7 @@ def init_db():
 
     # Test users.  (Contract_Account_ID, Keycloak_ID(Sub)) 
     insert_users = "INSERT INTO sub (Contract_Account_ID, Keycloak_Account_ID) VALUES (:Contract_Account_ID,:Keycloak_Account_ID)"
-    users = ({"Contract_Account_ID": "363000024", "Keycloak_Account_ID":"a24275cd-3fa9-4567-8579-480a9b9dd51c"})
+    users = ({"Contract_Account_ID": "363000024", "Keycloak_Account_ID":"15c60034-2933-4eaa-b052-5986bf24ae84"})
     cursor.execute(insert_users,users)
 
     db.commit()
