@@ -49,7 +49,7 @@ def init_db():
     
     file = open(f"{current_app.root_path}/Inovationhub_mini A.csv")
     contents = csv.reader(file)
-    print(f"{current_app.root_path}/Inovationhub_mini A.csv")
+    print(f"{current_app.root_path}/client_db/Inovationhub_mini A.csv")
     cursor.executemany(insert_records, contents)
 
     # Test users.  (Contract_Account_ID, Keycloak_ID(Sub)) 
