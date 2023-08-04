@@ -46,8 +46,8 @@ Deploy: ``` docker run  -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_P
 ### Backend
 Change directory: ``` cd EurekaPower/backend/ ``` \
 Install requirements: ``` pip install -r requirements.txt ```  
-Initialize the database: ``` flask --app eurekapower_plotly_code init-db ``` \
-Deploy: ``` flask --app eurekapower_plotly_code run --port 5000 ```
+Initialize the database: ``` flask --app app/ init-db ``` \
+Deploy: ``` flask --app app/ run --port 5000 ```
 ### Frontend
 Change directory: ``` cd EurekaPower/frontend/ ``` \
 Install requirements: ``` pip install -r requirements.txt ```  
