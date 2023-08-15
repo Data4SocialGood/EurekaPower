@@ -60,6 +60,6 @@ Username: giorgos123 \
 password: 123 
 
 ## Contact
-Georgios Drainakis: [gdrainakis@mail.ntua.gr](gdrainakis@mail.ntua.gr)
+Georgios Drainakis: [gdrainakis@mail.ntua.gr](mailto:gdrainakis@mail.ntua.gr)
 ## License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
