@@ -47,7 +47,7 @@ def init_db():
             Square_Meters)\
             VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
     
-    file = open(f"{current_app.root_path}/client_db/Inovationhub_mini A.csv")
+    file = open(f"{current_app.root_path}/client_db/demo_data.csv")
     contents = csv.reader(file) 
     cursor.executemany(insert_records, contents)
 
